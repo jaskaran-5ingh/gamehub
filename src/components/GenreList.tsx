@@ -10,11 +10,23 @@ import {
 import useGenres from '../hooks/useGenres';
 import getCroppedImageUrl from '../services/image-url';
 import useGameQueryStore from '../store';
+import useQueryParameter from '../hooks/useQueryParameter';
+import { useEffect } from 'react';
 
 const GenreList = () => {
+  
+  const [genreParameter, setGenreParameter] =
+  useQueryParameter("genreId");
+
   const { data, isLoading, error } = useGenres();
   const selectedGenreId = useGameQueryStore(s => s.gameQuery.genreId);
   const setSelectedGenreId = useGameQueryStore(s => s.setGenreId);
+
+  useEffect(() => {
+    if (genreParameter) {
+      setSelectedGenreId(parseInt(genreParameter));
+    }
+  }, [genreParameter]);
 
   if (error) return null;
 
@@ -43,7 +55,10 @@ const GenreList = () => {
                     ? 'bold'
                     : 'normal'
                 }
-                onClick={() => setSelectedGenreId(genre.id)}
+                onClick={() => {
+                  setGenreParameter(`${genre.id}`);
+                  setSelectedGenreId(genre.id);
+                }}
                 fontSize="md"
                 variant="link"
               >
