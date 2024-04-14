@@ -22,7 +22,9 @@
     "react-icons": "^4.7.1",
     "react-infinite-scroll-component": "6.1",
     "react-router-dom": "^6.10.0",
-    "zustand": "^4.3.7"
+    "zustand": "^4.3.7",
+    "@vercel/analytics": "^1.2.2",
+    "@vercel/speed-insights": "^1.0.10"
   },
   "devDependencies": {
     "@types/ms": "^0.7.31",
